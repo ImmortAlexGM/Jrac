@@ -6,6 +6,8 @@ A personal, predictable, and robust single-file Java script to sync and normaliz
 
 Built with modern Java, meant to be run directly as a script without explicit compilation.
 
+An LLM was used only to translate this file and the comments; the script itself was written entirely by hand.
+
 ## Requirements
 
 * **JDK 25+** — A full **JDK is required** (not just a JRE) to natively support running single-file programs directly from the source code.
@@ -49,6 +51,11 @@ Jrac recursively traverses the source directory tree and mirrors its exact struc
 For every file encountered in the directory tree, Jrac decides its fate based on the configuration:
 * **Transcoding**: If a file is an audio format (found in `audioExts`) but *not* in `skipConvertExts`, it is asynchronously transcoded using FFmpeg.
 * **Direct Copying**: If an audio file is already in a delivery format (found in `skipConvertExts`), it is copied as-is to preserve original quality and save time.
+* **CUE Sheet Processing**:
+    * If a `.cue` file is found in a directory, it is copied to the destination.
+    * **Selective Sync**: Jrac scans the CUE sheet and processes (copies or transcodes) *only* the specific audio files listed inside that CUE sheet, ignoring any unrelated audio in the same folder.
+    * **Dynamic CUE Updating**: If an audio file referenced in the CUE sheet is transcoded (e.g., from FLAC to Opus), Jrac automatically updates the corresponding filename inside the destination `.cue` file to match its new extension.
+    * **Encoding**: Please note that only **UTF-8** encoded `.cue` files are supported.
 * **Cover Art Normalization**:
     * The script searches the directory for image files matching the `coverNames` list in order of priority.
     * **Fallback**: If no matching name is found, but the directory contains exactly *one* image file with a supported extension, Jrac picks it as the cover art.
