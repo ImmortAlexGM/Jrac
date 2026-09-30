@@ -284,7 +284,7 @@ void process(ExecutorService executor, List<Future<Integer>> futures, List<Path>
             try (Process process = pb.start()) {
                 process.errorReader().lines().forEach(s -> printError(srcFile.getFileName()+": "+s));
                 int exitCode = process.waitFor();
-                String msg = srcFile +": exit code: "+exitCode;
+                String msg = srcFile.toString();
                 if (exitCode == 0)
                     msg += ": OK";
                 else msg += ": with error code "+exitCode;
