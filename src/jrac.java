@@ -1,6 +1,6 @@
 
 // Which file extensions should be considered audio files.
-final Set<String> audioExts = Set.of("flac", "dsf", "mp3", "ogg", "opus");
+final Set<String> audioExts = Set.of("flac", "ape", "dsf", "mp3", "ogg", "opus");
 // Which file extensions should simply be copied rather than transcoded.
 final Set<String> skipConvertExts = Set.of("mp3", "ogg", "opus");
 
